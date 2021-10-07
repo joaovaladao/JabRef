@@ -19,12 +19,41 @@ public class ColorUtilTest {
     private static final Color C4 = Color.color(1, 1, 1, 1);
     private static final Color C5 = Color.color(0.6, 0.8, 0.5, 0.3);
 
+    private static final Color C7 = Color.rgb(255, 255, 255, 0);
+    private static final Color C8 = Color.color(1, 1, 1, 1);
+
+    private static final Color C6 = Color.BLUE;
+    private static final Color C9 = Color.hsb(240, 1, 1, 1);
+    private static final Color C10 = Color.rgb(0, 0, 255);
+    private static final Color C11 = Color.web("0x0000FF",1.0);
+
     private ColorUtil colorUtil = new ColorUtil();
 
     @Test
     public void toRGBCodeTest() {
         assertEquals("#3366FF", ColorUtil.toRGBCode(C1));
         assertEquals("#FFFFFF", ColorUtil.toRGBCode(C2));
+    }
+
+    @Test
+    public void toRGBSimpleCodeTest() {
+        assertEquals("#0000FF", ColorUtil.toRGBCode(C6));
+    }
+
+    @Test
+    public void toRGBCodeNoOpacityTest() {
+        String noOpacity = "#FFFFFF";
+        assertEquals(noOpacity, ColorUtil.toRGBCode(C7));
+        assertEquals(noOpacity, ColorUtil.toRGBCode(C8));
+    }
+
+    @Test
+    public void toRGBCodeDifferentDeclarations() {
+        String differentDefinitions = "#0000FF";
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C6));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C9));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C10));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C11));
     }
 
     @ParameterizedTest
@@ -47,5 +76,26 @@ public class ColorUtilTest {
     public void toHexTest() {
         assertEquals("#000001", ColorUtil.toHex(C1));
         assertEquals("#010101", ColorUtil.toHex(C2));
+    }
+
+    @Test
+    public void toHexSimpleTest() {
+        assertEquals("#000001", ColorUtil.toHex(C6));
+    }
+
+    @Test
+    public void toHexCodeNoOpacityTest() {
+        String noOpacity = "#FFFFFF";
+        assertEquals(noOpacity, ColorUtil.toRGBCode(C7));
+        assertEquals(noOpacity, ColorUtil.toRGBCode(C8));
+    }
+
+    @Test
+    public void toHexCodeDifferentDeclarations() {
+        String differentDefinitions = "#0000FF";
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C6));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C9));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C10));
+        assertEquals(differentDefinitions, ColorUtil.toRGBCode(C11));
     }
 }
