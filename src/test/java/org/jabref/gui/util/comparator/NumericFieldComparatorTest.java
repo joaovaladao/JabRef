@@ -62,4 +62,52 @@ public class NumericFieldComparatorTest {
     public void compareWordWithMinus() {
         assertEquals(-1, comparator.compare("-abc", "-5"));
     }
+
+
+
+    @Test
+    public void compareMaxIntLimit()
+    {
+        String maxInt = "2.147.483.647";
+        assertEquals(0, comparator.compare(maxInt, maxInt));
+    }
+
+    @Test
+    public void compareMaxIntLimitPlus()
+    {
+        String maxIntPlus = "2.147.483.648";
+        String maxInt = "2.147.483.647";
+        assertEquals(-1, comparator.compare(maxInt, maxIntPlus));
+    }
+
+    @Test
+    public void compareMaxIntLimitMinus()
+    {
+        String maxIntPlus = "2.147.483.646";
+        String maxInt = "2.147.483.647";
+        assertEquals(1, comparator.compare(maxInt, maxIntPlus));
+    }
+
+    @Test
+    public void compareMinIntLimit()
+    {
+        String minInt = "-2.147.483.647";
+        assertEquals(0, comparator.compare(minInt, minInt));
+    }
+
+    @Test
+    public void compareMinIntLimitPlus()
+    {
+        String minIntPlus = "-2.147.483.646";
+        String minInt = "-2.147.483.647";
+        assertEquals(1, comparator.compare(minInt, minIntPlus));
+    }
+
+    @Test
+    public void compareMinIntLimitMinus()
+    {
+        String minIntPlus = "-2.147.483.648";
+        String minInt = "-2.147.483.647";
+        assertEquals(-1, comparator.compare(minInt, minIntPlus));
+    }
 }
